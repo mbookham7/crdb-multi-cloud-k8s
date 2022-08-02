@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: coredns-custom
+  namespace: kube-system
+data:
+  cockroach.server: | # you may select any name here, but it must end with the .server file extension
+    eu-west-1.svc.cluster.local:53 {
+        errors
+        cache 30
+        forward . 54.73.179.9 54.220.32.95 52.16.122.64 {
+          force_tcp
+        }
+    }
+    europe-west4.svc.cluster.local:53 {
+        errors
+        cache 30
+        forward . 34.90.226.166
+    }
