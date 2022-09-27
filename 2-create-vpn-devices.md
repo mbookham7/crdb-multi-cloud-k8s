@@ -26,7 +26,7 @@ az network vnet-gateway create -g $rg -n $az_vpn_gw --public-ip-address $az_vpn_
 
 With AWS you create the VPN Gateway first then attach this to a VPC. The below command to creates the VPN Gateway. We are adding a tag of the cluster name so we can use this to reference it in a later step.
 ```
-aws ec2 create-vpn-gateway --type ipsec.1 --region $aws_region --tag-specifications 'ResourceType=vpn-gateway,Tags=[{Key=Name,Value=$clus2}]'
+aws ec2 create-vpn-gateway --type ipsec.1 --region $aws_region --tag-specifications 'ResourceType=vpn-gateway,Tags=[{Key=Name,Value='$clus2'}]'
 ```
 To attach the VPN Gateway to a VPC we need to pieces of information, the VPC ID and the VPN Gateway ID. We will get these and add them as environment variables. We can the substitute these variables into our command for ease of use.
 ```
