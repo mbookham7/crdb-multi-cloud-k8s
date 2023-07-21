@@ -32,6 +32,12 @@ az aks create \
 --node-count $n_nodes \
 --kubernetes-version $az_kubernetes_version
 ```
+
+Store the Kubeconfig
+```
+az aks get-credentials --resource-group $rg --name $clus1
+```
+
 ## Cloud Two - AWS
 
 ### Create EKS Cluster

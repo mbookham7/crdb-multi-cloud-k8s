@@ -17,7 +17,7 @@ aws ec2 create-customer-gateway --type ipsec.1 --public-ip $az_vpn_gateway_ip_ad
 
 With the customer gateway created in the AWS with the details of the Azure Virtual Gateway we can now standup the first end of the VPN tunnel. The below command obtains the Customer Gateway ID and adds it to an environment variable.
 ```
-aws_customergateway_id=$(aws ec2 describe-customer-gateways --region $aws_region --filter "Name=tag:Name,Values=$clus2-cg-azure" --query "CustomerGateways[*].[CustomerGatewayId]" --output text)
+aws_customergateway_id=$(aws ec2 describe-customer-gateways --region $aws_region --filter "Name=tag:Name,Values=$clus2-cg-azure" --query "CustomerGateways[?State=='available'].[CustomerGatewayId]" --output text)
 ```
 
 Now we create the VPN Connection in AWS using the details we have added to environment variables.
@@ -33,7 +33,7 @@ aws ec2 create-vpn-connection \
 
 Once created get the VPN connection id and add this to an environment variable.
 ```
-aws_vpn_connection_id_azure=$(aws ec2 describe-vpn-connections --region $aws_region --filter "Name=tag:Name,Values=$clus2-vpn-to-azure" --query "VpnConnections[*].[VpnConnectionId]" --output text)
+aws_vpn_connection_id_azure=$(aws ec2 describe-vpn-connections --region $aws_region --filter "Name=tag:Name,Values=$clus2-vpn-to-azure" --query "VpnConnections[?State=='available'].[VpnConnectionId]" --output text)
 ```
 
 Add a route to the VPN Connection
@@ -57,7 +57,7 @@ aws_route_table_id=$(aws ec2 describe-route-tables --region $aws_region --filter
 
 Now we have the routing table ID we can add the relevant route.
 ```
-aws ec2 create-route --route-table-id rtb-041a5fc47af79c036 --region $aws_region --destination-cidr-block $az_subnet_prefix --gateway-id $aws_vpngateway_id
+aws ec2 create-route --route-table-id $aws_route_table_id --region $aws_region --destination-cidr-block $az_subnet_prefix --gateway-id $aws_vpngateway_id
 ```
 
 3. Create the VPN Connection in Azure.
@@ -138,7 +138,7 @@ aws ec2 create-customer-gateway --type ipsec.1 --public-ip $gcp_vpn_outsideipadd
 
 The next task is to create vpn connection in AWS to GCP. First obtain the customer gateway id and store this in an environment variable.
 ```
-aws_customergateway_id_gcp=$(aws ec2 describe-customer-gateways --region $aws_region --filter "Name=tag:Name,Values=$clus3-cg-gcp" --query "CustomerGateways[*].[CustomerGatewayId]" --output text)
+aws_customergateway_id_gcp=$(aws ec2 describe-customer-gateways --region $aws_region --filter "Name=tag:Name,Values=$clus3-cg-gcp" --query "CustomerGateways[?State=='available'].[CustomerGatewayId]" --output text)
 ```
 
 Now create the connection itself in AWS.

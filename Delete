@@ -1,0 +1,28 @@
+Delete commands
+
+
+az group delete --resource-group $rg
+gcloud container clusters delete $clus3  --region=$gcp_region
+eksctl delete cluster --name $clus2 --region $aws_region
+
+gcloud compute networks subnets delete $gke_vcp_sub --region=$gcp_region
+gcloud compute networks subnets delete $gcp_vcp_name --region=$gcp_region
+
+gcloud compute target-vpn-gateways delete $gcp_mb_gke_gw  --region=$gcp_region
+gcloud compute addresses delete $gcp_gw_ip_name   --region=$gcp_region
+
+gcloud compute forwarding-rules delete fr-$gcp_mb_gke_gw-udp4500 --region=$gcp_region
+gcloud compute forwarding-rules delete fr-$gcp_mb_gke_gw-udp500 --region=$gcp_region
+gcloud compute forwarding-rules delete fr-$gcp_mb_gke_gw-esp --region=$gcp_region
+
+gcloud compute vpn-tunnels delete $clus3-azure-vpn-con-1 --region=$gcp_region
+
+gcloud compute routes delete $clus3-azure-route-1
+
+az network vpn-connection delete -g $rg -l $azregion -n $clus3-gcp-vpn-con-1
+az network vpn-connection delete -n $clus3-gcp-vpn-con-1
+az network vpn-connection delete -g $rg -n $clus3-gcp-vpn-con-1
+az network local-gateway delete -g $rg -n $clus3-gcp-vpn-1
+
+gcloud compute firewall-rules delete allowazureandaws --region=$gcp_region
+gcloud compute firewall-rules delete allowsshping --region=$gcp_region

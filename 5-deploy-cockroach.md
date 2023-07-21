@@ -3,9 +3,9 @@
 Description: 
 
 ```
-export context_eks="bookham@mb-eks-cluster-1.eu-west-1.eksctl.io"
-export context_gke="gke_cockroach-bookham_europe-west4_mb-gke-cluster-1"
-export context_aks="mb-aks-cluster-1"
+export context_eks="dsheldon@mb-eu-eks-cluster-1.eu-west-1.eksctl.io"
+export context_gke="gke_cockroach-dsheldon_europe-west4_mb-eu-gke-cluster-1"
+export context_aks="mb-uksouth-aks-cluster-1
 
 export eks_region="eu-west-1"
 export gke_region="europe-west4"
