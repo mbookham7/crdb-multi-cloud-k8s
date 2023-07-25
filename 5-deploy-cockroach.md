@@ -1,6 +1,13 @@
 # Step: Deploy CockroachDB
 
-Description: 
+kubectl config get-contexts -- Insert instructions
+Before we deploy CockroachDB, we need to first set up the values for the 3 Kubernetes Contexts, as these may be different for each user the best way to get them is to run the below command, then be sure to edit the variables in the next step with the corresponding valiues.
+
+```
+kubectl config get-contexts
+```
+
+Setting Variables 
 
 ```
 export context_eks="dsheldon@mb-eu-eks-cluster-1.eu-west-1.eksctl.io"
