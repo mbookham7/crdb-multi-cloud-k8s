@@ -290,4 +290,4 @@ kubectl get svc --context $context_aks --namespace $az_region
 
 Put one of these in to your browser like `http://x.x.x.x:8080` and you will be able to log in with the creds we created earlier. This it it! If you have got this far you will have a multi-cloud CockroachDB cluster. Well Done! Go and make a cup of tea!
 
-[Back](README.md)
+[Back](../README.md)
