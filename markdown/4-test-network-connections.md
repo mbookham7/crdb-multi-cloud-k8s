@@ -24,6 +24,6 @@ Create a pod and ping the test pod. Replace $podip with the ip of the pod from t
 ```
 kubectl run -it network-test --image=alpine --restart=Never -- ping $podip
 ```
-Now you are ready to move to the next step. [Cockroach setup](cockroach-setup.md)
+Now you are ready to move to the next step.
 
 [next](5-deploy-cockroach.md)
