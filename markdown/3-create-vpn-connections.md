@@ -231,4 +231,4 @@ gcloud compute routes create $clus3-aws-route-2 \
 Add security group rules in all three clouds for each Cluster.
 
 
-
+[next](4-test-network-connections.md)
