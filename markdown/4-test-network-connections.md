@@ -26,4 +26,4 @@ kubectl run -it network-test --image=alpine --restart=Never -- ping $podip
 ```
 Now you are ready to move to the next step. [Cockroach setup](cockroach-setup.md)
 
-[Back](README.md)
+[next](5-deploy-cockroach.md)
