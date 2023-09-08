@@ -5,7 +5,7 @@
 First thing we need to do is to create a `GatewaySubnet`. This is a requirement for a VPN Gateway in Azure. This subnet must be called `GatewaySubnet`.
 ```
 az network vnet subnet create \
-  --vnet-name crdb-$azregion \
+  --vnet-name crdb-$az_region \
   -n GatewaySubnet \
   -g $rg \
   --address-prefix 10.1.255.0/27
@@ -19,7 +19,7 @@ az network public-ip create --name $az_vpn_gateway_ip --resource-group $rg --all
 With the subnet created we can create our VPN Gateway.
 ```
 az network vnet-gateway create -g $rg -n $az_vpn_gw --public-ip-address $az_vpn_gateway_ip \
-    --vnet crdb-$azregion --gateway-type Vpn --sku VpnGw1 --vpn-type RouteBased --no-wait
+    --vnet crdb-$az_region --gateway-type Vpn --sku VpnGw1 --vpn-type RouteBased --no-wait
 ```
 
 ## Cloud Two - AWS

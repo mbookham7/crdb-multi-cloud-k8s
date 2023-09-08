@@ -125,7 +125,7 @@ spec:
   selector:
     app: cockroachdb
 ---
-apiVersion: policy/v1beta1
+apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
   name: cockroachdb-budget
@@ -142,7 +142,7 @@ kind: StatefulSet
 metadata:
   name: cockroachdb
   # TODO: Use this field to specify a namespace other than "default" in which to deploy CockroachDB (e.g., us-east-1).
-  namespace: europe-west4
+  namespace: eu-west-1
 spec:
   serviceName: "cockroachdb"
   replicas: 3
@@ -168,8 +168,8 @@ spec:
                   - cockroachdb
               topologyKey: kubernetes.io/hostname
       # This init container is used to determine the availability zones of the Cockroach pods. The AZs are used to define --locality when starting Cockroach nodes.
-      #initContainers:
-      #- command:
+      # initContainers:
+      # - command:
       #  - sh
       #  - -ecx
       #  - echo "aws-$(curl http://169.254.169.254/latest/meta-data/placement/availability-zone/)"
@@ -185,7 +185,7 @@ spec:
       #    name: cockroach-env
       containers:
       - name: cockroachdb
-        image: cockroachdb/cockroach:v21.2.7
+        image: cockroachdb/cockroach:v23.1.8
         imagePullPolicy: IfNotPresent
         # TODO: Change these to appropriate values for the hardware that you're running. You can see
         # the resources that can be allocated on each of your Kubernetes nodes by running:
@@ -252,7 +252,7 @@ spec:
             --advertise-host $(hostname -f)
             --http-addr 0.0.0.0
             --join cockroachdb-0.cockroachdb.eu-west-1,cockroachdb-1.cockroachdb.eu-west-1,cockroachdb-2.cockroachdb.eu-west-1,cockroachdb-0.cockroachdb.europe-west4,cockroachdb-1.cockroachdb.europe-west4,cockroachdb-2.cockroachdb.europe-west4,cockroachdb-0.cockroachdb.uksouth,cockroachdb-1.cockroachdb.uksouth,cockroachdb-2.cockroachdb.uksouth
-            --locality=cloud=gcp,region=europe-west4
+            --locality=cloud=aws,region=eu-west-1
             --cache $(expr $MEMORY_LIMIT_MIB / 4)MiB
             --max-sql-memory $(expr $MEMORY_LIMIT_MIB / 4)MiB
       # No pre-stop hook is required, a SIGTERM plus some time is all that's

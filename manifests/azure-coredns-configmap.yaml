@@ -8,12 +8,12 @@ data:
     eu-west-1.svc.cluster.local:53 {
         errors
         cache 30
-        forward . 54.73.179.9 54.220.32.95 52.16.122.64 {
+        forward . 52.211.227.198 99.80.3.29 99.81.126.100 {
           force_tcp
         }
     }
     europe-west4.svc.cluster.local:53 {
         errors
         cache 30
-        forward . 34.90.226.166
+        forward . 35.234.175.241
     }

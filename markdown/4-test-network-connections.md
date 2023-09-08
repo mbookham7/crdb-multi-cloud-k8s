@@ -18,7 +18,7 @@ kubectl describe pod network-test
 
 Switch to $clus2 context
 ```
-kubectl config use-context dsheldon@mb-eu-eks-cluster-1.eu-west-1.eksctl.io
+kubectl config use-context $clus2
 ```
 Create a pod and ping the test pod. Replace $podip with the ip of the pod from the output of the `kubectl describe pod network-test`
 ```
