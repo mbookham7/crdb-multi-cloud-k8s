@@ -261,8 +261,8 @@ To enable enterprise features you can request an evaluation licence from [here](
 
 Set your license like this.
 ```
-SET CLUSTER SETTING cluster.organization = 'Cockroach Labs';
-SET CLUSTER SETTING enterprise.license = 'crl-0-EMCt+LcGGAIiDkNvY2tyb2FjaCBMYWJz';
+SET CLUSTER SETTING cluster.organization = '';
+SET CLUSTER SETTING enterprise.license = '';
 ```
 
 Below is a how to update the map view. Again, if you have used other regions these will need to be changed. You can find the referaqnces [here](https://www.cockroachlabs.com/docs/stable/enable-node-map)
