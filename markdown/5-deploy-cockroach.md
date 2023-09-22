@@ -29,7 +29,7 @@ Once these are applied the service `kube-dns-lb` will appear in each cluster exp
 ```
 kubectl get svc --namespace kube-system --selector k8s-app=kube-dns --context $context_aks
 kubectl get svc --namespace kube-system --selector k8s-app=kube-dns --context $context_gke
-kubectl get svc --namespace kube-system --selector k8s-app=kube-dns --context $context_aws
+kubectl get svc --namespace kube-system --selector k8s-app=kube-dns --context $context_eks
 ```
 
 Out of the three providers GKE is the only one still using `kube-dns`. So we are going to replace this with CoreDNS.
@@ -76,7 +76,7 @@ Below is an example of where the updates need to be made. Region1 and Region2 an
 A configmap for each region needs to be applied using the template.
 
 ```
-kubectl -n kube-system replace -f mainifests/aws-coredns-configmap.yaml --context $context_eks
+kubectl -n kube-system replace -f manifests/aws-coredns-configmap.yaml --context $context_eks
 kubectl -n kube-system replace -f manifests/gcp-coredns-configmap.yaml --context $context_gke
 kubectl -n kube-system apply -f manifests/azure-coredns-configmap.yaml --context $context_aks
 ```
@@ -85,7 +85,7 @@ To ensure the new configmap is applied we delete the CoreDNS pods.
 ```
 kubectl delete pod --namespace kube-system --selector k8s-app=kube-dns --context $context_aks
 kubectl delete pod --namespace kube-system --selector k8s-app=kube-dns --context $context_gke
-kubectl delete pod --namespace kube-system --selector k8s-app=kube-dns --context $context_aws
+kubectl delete pod --namespace kube-system --selector k8s-app=kube-dns --context $context_eks
 ```
 
 Now we have updated DNS we can deploy CockroachDB. First we create a namespace in each region reflecting the region names.
@@ -276,9 +276,9 @@ INSERT INTO system.locations VALUES
 
 To gain access to the CockroachDB Console we can expose the service externally.
 ```
-kubectl apply -f aws-svc-admin-ui.yaml --context $context_eks --namespace $aws_region
-kubectl apply -f gke-svc-admin-ui.yaml --context $context_gke --namespace $gcp_region
-kubectl apply -f azure-svc-admin-ui.yaml --context $context_aks --namespace $az_region
+kubectl apply -f manifests/aws-svc-admin-ui.yaml --context $context_eks --namespace $aws_region
+kubectl apply -f manifests/gke-svc-admin-ui.yaml --context $context_gke --namespace $gcp_region
+kubectl apply -f manifests/azure-svc-admin-ui.yaml --context $context_aks --namespace $az_region
 ```
 
 To obtain the IP of the external service use the command below.

@@ -4,7 +4,7 @@ We can now perform a network test to check that the mesh is established and we a
 
 Set Context for `$clus1`
 ```
-kubectl config use-context `$clus1`
+kubectl config use-context $clus1
 ```
 Create a test pod to ping
 ```
@@ -22,7 +22,7 @@ kubectl config use-context $clus2
 ```
 Create a pod and ping the test pod. Replace `$podip` with the ip of the pod from the output of the `kubectl describe pod network-test`
 ```
-kubectl run -it network-test --image=alpine --restart=Never -- ping `$podip`
+kubectl run -it network-test-pinger --image=alpine --restart=Never -- ping `$podip`
 ```
 Complete this for all regions.
 

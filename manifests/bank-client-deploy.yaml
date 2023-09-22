@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: bank-client
+  name: bank-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bank-client
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: bank-client
+    spec:
+      containers:
+      - image: docker.io/mikebookhamcap/bank-client:2.0.1
+        imagePullPolicy: Always
+        name: bank-client
+        args: ["@/cnb/process/config/commands.txt"]
+        volumeMounts:
+          - name: client-volume
+            mountPath: /cnb/process/config
+      volumes:
+        - name: client-volume
+          configMap:
+            name: client-configmap
+            items:
+              - key: commands.txt
+                path: commands.txt

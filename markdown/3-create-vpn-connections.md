@@ -148,7 +148,7 @@ aws ec2 create-vpn-connection \
     --region $aws_region \
     --customer-gateway-id $aws_customergateway_id_gcp \
     --vpn-gateway-id $aws_vpngateway_id \
-    --options "{\"StaticRoutesOnly\":true,\"LocalIpv4NetworkCidr\": \"10.4.0.0/14"}" \
+    --options "{\"StaticRoutesOnly\":true,\"LocalIpv4NetworkCidr\": \"10.4.0.0/14\"}" \
     --tag-specifications 'ResourceType=vpn-connection,Tags=[{Key=Name,Value='$clus2-vpn-to-gcp'}]'
 ```
 
@@ -229,6 +229,8 @@ gcloud compute routes create $clus3-aws-route-2 \
 ```
 
 Add security group rules in all three clouds for each Cluster.
+
+Allow traffic from all subnets inbound. For google you need both the vpc and pod network into AWS for this to work..
 
 
 [next](4-test-network-connections.md)

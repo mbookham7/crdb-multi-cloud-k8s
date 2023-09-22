@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: bank-server
+  name: bank-server
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: bank-server
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: bank-server
+    spec:
+      containers:
+      - image: docker.io/mikebookhamcap/bank-server:2.0.1
+        imagePullPolicy: Always
+        name: bank-server
+        args: ["--spring.datasource.url=jdbc:postgresql://cockroachdb-public.eu-west-1.svc.cluster.local:26257/roach_bank?sslmode=require", "--spring.datasource.username=craig", "--spring.datasource.password=cockroach", "--roachbank.alternative-workflow=true", "--roachbank.default-account-limit=500", "--roachbank.select-for-update=true", "--roachbank.account-plan.accounts-per-city: 10000", "--roachbank.account-plan.initial-balance: \"100000.00\""]
+        resources: {}
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: bank-server
+  name: bank-server
+spec:
+  ports:
+  - name: 8090-8090
+    port: 8090
+    protocol: TCP
+    targetPort: 8090
+  selector:
+    app: bank-server
+  type: LoadBalancer
+status:
+  loadBalancer: {}

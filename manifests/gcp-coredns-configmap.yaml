@@ -27,7 +27,7 @@ data:
        errors
        ready
        cache 10
-       forward . 52.211.227.198 99.80.3.29 99.81.126.100 {      # <---- Modify
+       forward . 54.75.28.214 63.35.58.105 54.74.115.114 {      # <---- Modify
             force_tcp            # <---- Modify
        }
    }
@@ -36,6 +36,6 @@ data:
        errors
        ready
        cache 10
-       forward . 20.108.212.112 {      # <---- Modify
+       forward . 51.145.63.76 {      # <---- Modify
        }
    }

@@ -21,7 +21,7 @@ data:
        errors
        ready
        cache 10
-       forward . 35.234.175.241 {      # <---- Modify
+       forward . 34.32.196.125 {      # <---- Modify
        }
    }
    uksouth.svc.cluster.local:53 {       # <---- Modify
@@ -29,7 +29,7 @@ data:
        errors
        ready
        cache 10
-       forward . 20.108.212.112 {      # <---- Modify
+       forward . 51.145.63.76 {      # <---- Modify
        }
    }
 kind: ConfigMap
