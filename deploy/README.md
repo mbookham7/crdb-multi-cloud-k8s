@@ -73,18 +73,18 @@ kubectl get po -n roach-bank --context $clus3
 ```
 
 ```
-ALTER DATABASE roach_bank PRIMARY REGION "azure-northeurope";
-ALTER DATABASE roach_bank ADD REGION "azure-uksouth";
-ALTER DATABASE roach_bank ADD REGION "azure-ukwest";
+ALTER DATABASE roach_bank PRIMARY REGION "eu-west-1";
+ALTER DATABASE roach_bank ADD REGION "uksouth";
+ALTER DATABASE roach_bank ADD REGION "europe-west4";
 ```
 
 ```
 DELETE  from region where 1=1;
 INSERT into region
 VALUES 
-('azure','azure-northeurope', 'stockholm,copenhagen,helsinki,oslo,riga,tallinn'),
+('azure','aws-eu-west-1', 'stockholm,copenhagen,helsinki,oslo,riga,tallinn'),
 ('azure','azure-uksouth', 'london,birmingham,leeds,amsterdam,rotterdam,antwerp,hague,ghent,brussels'),
-('azure','azure-ukwest', 'dublin,belfast,london,liverpool,manchester,glasgow,birmingham,leeds');
+('azure','gcp-europe-west4', 'dublin,belfast,london,liverpool,manchester,glasgow,birmingham,leeds');
 \q
 ```
 
